@@ -1,0 +1,144 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card ">
+            <div class="card-header ">
+
+            </div>
+            <div class="card-body ">
+
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Location</label>
+                                <ng-select [items]="locationsList" bindLabel="location_name" bindValue="id"
+                                    name='location_name' [(ngModel)]="selectedLocationId"
+                                    (change)="selectedFilterChange()">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Place</label>
+                                <ng-select [items]="placesList" bindLabel="place_name" bindValue="id" name='place_name'
+                                    [(ngModel)]="selectedPlaceId" (change)="selectedFilterChange()">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+
+            </div>
+            <div class="card-footer ">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3" *ngFor="let criteriaItem of grouppedCriterias">
+        <div class="card ">
+            <div class="card-header ">
+                <h5 class="card-title">{{criteriaItem.criteria_name}}</h5>
+                <!-- <p class="card-category">Last Campaign Performance</p> -->
+            </div>
+            <div class="card-body ">
+
+                <div class="chart-wrapper">
+                    <canvas baseChart [data]="criteriaItem.pieChartData" [labels]="pieChartLabels"
+                        [chartType]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins"
+                        [legend]="pieChartLegend" [colors]="pieChartColor">
+                    </canvas>
+                </div>
+
+
+            </div>
+            <div class="card-footer ">
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="row" *ngIf="redLightOverviewList.length > 0">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <!-- <h5 class="card-title">Red Light Overview</h5> -->
+                <!-- <p class="card-category">
+                    These are your current assinged taks.
+                </p> -->
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-plain">
+                            <div class="card-header">
+                                <h5 class="card-title">Red Light Overview</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>
+                                                Location
+                                            </th>
+                                            <th>
+                                                Place
+                                            </th>
+                                            <th>
+                                                Criteria
+                                            </th>
+                                            <th>
+                                                Note
+                                            </th>
+                                            <th class="text-right">
+                                                Registered Date
+                                            </th>
+                                            <th class="text-right">
+                                                Target Date
+                                            </th>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let criteriaDetail of redLightOverviewList">
+                                                <td>
+                                                    {{criteriaDetail.location_name}}
+                                                </td>
+                                                <td>
+                                                    {{criteriaDetail.place_name}}
+                                                </td>
+                                                <td>
+                                                    {{criteriaDetail.criteria_name}}
+                                                </td>
+                                                <td>
+                                                    {{criteriaDetail.note}}
+                                                </td>
+                                                <td class="text-right">
+                                                    {{criteriaDetail.curr_date}}
+                                                </td>
+                                                <td class="text-right">
+                                                    {{criteriaDetail.target_date}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </div>
+</div>
